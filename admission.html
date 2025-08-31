@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Student Admission Form</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    /* Background and body */
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      font-family: 'Open Sans', Arial, sans-serif;
+      /* Colorful gradient background */
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    /* Container with semi-transparent glass effect */
+    .container {
+      max-width: 480px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25);
+      padding: 40px 36px 36px 36px;
+      backdrop-filter: saturate(180%) blur(12px);
+      -webkit-backdrop-filter: saturate(180%) blur(12px);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+    }
+
+    /* Title - Pacifico with shadow */
+    .form-title {
+      font-family: 'Pacifico', cursive;
+      font-size: 2.8rem;
+      text-align: center;
+      margin-bottom: 32px;
+      color: #4c1d95; /* deep purple */
+      text-shadow: 2px 2px 6px rgba(37, 117, 252, 0.6);
+      letter-spacing: 1.5px;
+    }
+
+    /* Form group spacing */
+    .form-group {
+      margin-bottom: 22px;
+    }
+
+    /* Labels with purple shade */
+    label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #4c1d95;
+      font-size: 1.1rem;
+      font-family: 'Open Sans', Arial, sans-serif;
+      letter-spacing: 0.02em;
+      user-select: none;
+    }
+
+    /* Inputs and select with vibrant focus and subtle shadow */
+    input[type="text"],
+    input[type="email"],
+    input[type="date"],
+    select {
+      width: 100%;
+      padding: 12px 14px;
+      font-size: 1rem;
+      border-radius: 12px;
+      border: 2.5px solid #c0b6f0;
+      background: #f9f7ff;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
+      outline-offset: 2px;
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="date"]:focus,
+    select:focus {
+      border-color: #6a11cb;
+      box-shadow: 0 0 12px 2px rgba(106, 17, 203, 0.4);
+      background: #ffffff;
+    }
+
+    /* Checkbox group with stylized label */
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      margin: 26px 0 10px 0;
+    }
+    .checkbox-group input[type="checkbox"] {
+      width: 22px;
+      height: 22px;
+      margin-right: 12px;
+      accent-color: #6a11cb;
+      cursor: pointer;
+    }
+    .checkbox-group label {
+      font-weight: 500;
+      font-size: 1.05rem;
+      color: #4527a0;
+      user-select: none;
+      cursor: pointer;
+    }
+    .checkbox-group a {
+      color: #6a11cb;
+      text-decoration: none;
+      margin-left: 4px;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    .checkbox-group a:hover {
+      color: #2575fc;
+      text-decoration: underline;
+    }
+
+    /* Submit button with gradient and shadow */
+    .submit-btn {
+      width: 100%;
+      padding: 14px 0;
+      font-size: 1.25rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 16px;
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 6px 14px rgba(38, 85, 255, 0.6);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+    }
+    .submit-btn:hover {
+      background: linear-gradient(90deg, #8e24aa, #1e4ecc);
+      box-shadow: 0 8px 18px rgba(35, 45, 255, 0.8);
+    }
+    .submit-btn:active {
+      transform: scale(0.98);
+      box-shadow: 0 4px 12px rgba(36, 49, 212, 0.7);
+    }
+
+    /* Error message style */
+    .error {
+      color: #e11d48;
+      font-size: 0.92rem;
+      margin-top: 4px;
+      min-height: 18px;
+      font-weight: 600;
+      font-family: 'Open Sans', Arial, sans-serif;
+      letter-spacing: 0.02em;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 520px) {
+      .container {
+        max-width: 95vw;
+        padding: 32px 26px 26px 26px;
+        border-radius: 15px;
+      }
+      .form-title {
+        font-size: 2.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" role="main" aria-label="Student Admission Form">
+    <h1 class="form-title">Student Admission Form</h1>
+    <form id="admissionForm" novalidate>
+      <div class="form-group">
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" name="fullName" placeholder="Enter your name" required aria-describedby="fullNameError" />
+        <div class="error" id="fullNameError" role="alert" aria-live="polite"></div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="abc@example.com" required aria-describedby="emailError" />
+        <div class="error" id="emailError" role="alert" aria-live="polite"></div>
+      </div>
+      <div class="form-group">
+        <label for="dob">Date of Birth</label>
+        <input type="date" id="dob" name="dob" required aria-describedby="dobError" />
+        <div class="error" id="dobError" role="alert" aria-live="polite"></div>
+      </div>
+      <div class="form-group">
+        <label for="course">Select Course</label>
+        <select id="course" name="course" required aria-describedby="courseError">
+          <option value="">-- Please Select --</option>
+          <option value="B.Tech">B.Tech</option>
+          <option value="B.Sc">B.Sc</option>
+          <option value="B.Com">B.Com</option>
+          <option value="B.A">B.A</option>
+          <option value="M.Tech">M.Tech</option>
+          <option value="M.Sc">M.Sc</option>
+        </select>
+        <div class="error" id="courseError" role="alert" aria-live="polite"></div>
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="terms" name="terms" aria-describedby="termsError" />
+        <label for="terms">I agree to the <a href="#" tabindex="-1">terms and conditions</a></label>
+      </div>
+      <div class="error" id="termsError" role="alert" aria-live="polite"></div>
+      <button type="submit" class="submit-btn">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    // Keep existing validation logic as is, included for completeness
+    const form = document.getElementById('admissionForm');
+    const fullName = document.getElementById('fullName');
+    const email = document.getElementById('email');
+    const dob = document.getElementById('dob');
+    const course = document.getElementById('course');
+    const terms = document.getElementById('terms');
+
+    const fullNameError = document.getElementById('fullNameError');
+    const emailError = document.getElementById('emailError');
+    const dobError = document.getElementById('dobError');
+    const courseError = document.getElementById('courseError');
+    const termsError = document.getElementById('termsError');
+
+    function validateEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    function validateDOB(dateString) {
+      if (!dateString) return false;
+      const dobDate = new Date(dateString);
+      const today = new Date();
+      const minAge = 10;
+      const age = today.getFullYear() - dobDate.getFullYear();
+      if (
+        age < minAge ||
+        dobDate > today ||
+        dobDate.getFullYear() < 1900
+      ) {
+        return false;
+      }
+      return true;
+    }
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      let valid = true;
+
+      if (!fullName.value.trim()) {
+        fullNameError.textContent = 'Full Name is required.';
+        valid = false;
+      } else {
+        fullNameError.textContent = '';
+      }
+
+      if (!email.value.trim()) {
+        emailError.textContent = 'Email is required.';
+        valid = false;
+      } else if (!validateEmail(email.value.trim())) {
+        emailError.textContent = 'Enter a valid email address.';
+        valid = false;
+      } else {
+        emailError.textContent = '';
+      }
+
+      if (!dob.value) {
+        dobError.textContent = 'Date of Birth is required.';
+        valid = false;
+      } else if (!validateDOB(dob.value)) {
+        dobError.textContent = 'Enter a valid date (at least 10 years old).';
+        valid = false;
+      } else {
+        dobError.textContent = '';
+      }
+
+      if (!course.value) {
+        courseError.textContent = 'Please select a course.';
+        valid = false;
+      } else {
+        courseError.textContent = '';
+      }
+
+      if (!terms.checked) {
+        termsError.textContent = 'You must agree to the terms.';
+        valid = false;
+      } else {
+        termsError.textContent = '';
+      }
+
+      if (valid) {
+        alert('Form submitted successfully!');
+        form.reset();
+        fullNameError.textContent = '';
+        emailError.textContent = '';
+        dobError.textContent = '';
+        courseError.textContent = '';
+        termsError.textContent = '';
+      }
+    });
+  </script>
+</body>
+</html>
